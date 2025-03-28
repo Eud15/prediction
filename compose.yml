@@ -1,0 +1,20 @@
+version: "1"
+services:
+  lifestylefrontend_prod:
+    restart: always
+    image: lifestylefrontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8021
+    extra_hosts:
+      - "iam.mtn.bj:10.77.156.109"
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+    environment:
+      VITE_IAM_URL : "https://iam.mtn.bj/"
+      VITE_IAM_CLIENT_ID : "life-style-web-app"
+      VITE_IAM_REALM : "Life-Style"
+      VITE_LIFESTYLE_BACKEND_URL : "http://10.77.60.64:8020"
