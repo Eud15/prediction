@@ -12,21 +12,21 @@ const payload = ref({
 })
 
 const dataApi = ref({})
-onMounted (() =>{
-  applyLoginAction()
-})
-function applyLoginAction() {
+// onMounted (() =>{
+//   applyLoginAction()
+// })
+// function applyLoginAction() {
 
-    authStore.loginAction()
-    .then(response => {
-      console.log('Réponse de lapi',response.data)
-      dataApi.value = response.data
-    })
-    .catch(error =>{
-      console.log(error)
-    } )
+//     authStore.loginAction()
+//     .then(response => {
+//       console.log('Réponse de lapi',response.data)
+//       dataApi.value = response.data
+//     })
+//     .catch(error =>{
+//       console.log(error)
+//     } )
   
-}
+// }
 </script>
 
 <template>

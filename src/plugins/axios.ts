@@ -10,7 +10,7 @@ import router  from '../router'
 const baseURL = {
 
   local: 'http://127.0.0.1:8000/api',
-  serverTest: 'http://20.115.92.109:8000/'
+  serverTest: 'http://20.115.92.109:8000/api'
 
 }
 

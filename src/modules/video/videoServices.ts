@@ -3,8 +3,8 @@ import { objectToFormData } from '../../utils/utils'
 
 export default {
 
-   c(id: any, payload: any) {
-    return $http.get(`/projects/workflows/${id}/steps`, payload)
+   getRecommendations() {
+    return $http.get('/recommendations/')
    },
 
 }
