@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import $service from "../video/videoServices"
 
-export const useAuthStore = defineStore('auth',() => {
+export const useVideoStore = defineStore('video',() => {
 
     var recommendations = ref([])
 

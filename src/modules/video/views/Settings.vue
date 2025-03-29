@@ -46,7 +46,7 @@
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDQ1KSI+PHBhdGggZD0iTTAgMCBMIDEwMCAxMDAiIHN0cm9rZT0iI0ZDRDM0RCIgc3Ryb2tlLXdpZHRoPSIyMCIgZmlsbD0ibm9uZSIgc3Ryb2tlLW9wYWNpdHk9IjAuMiIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')] opacity-30"></div>
         <div class="flex flex-col md:flex-row p-6">
           <div class="w-full md:w-1/3 mb-4 md:mb-0">
-            <img  :src="img2" alt="Person with sunglasses" class="h-40 object-cover w-full" />
+            <img :src="img2" alt="Person with sunglasses" class="h-40 object-cover w-full" />
           </div>
           <div class="w-full md:w-2/3 flex flex-col justify-center">
             <h2 class="text-2xl font-bold mb-2">Ready to Chill? Best Plans Await</h2>
@@ -55,96 +55,63 @@
         </div>
       </div>
 
-      <h1>TOP PRODUCTS</h1>
-      <!-- Promotional Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mb-6">
-        <!-- Card 1 -->
-        <div class="bg-purple-700 rounded-xl p-6 relative overflow-hidden">
+      <!-- SECTION 1: TOP PRODUCTS -->
+      <h2 class="text-2xl font-bold text-white px-4 py-3 mb-2">TOP PRODUCTS</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mb-8">
+        <div v-for="(product, index) in apiData.top_products" :key="index" 
+             class="bg-purple-700 rounded-xl p-6 relative overflow-hidden">
           <div class="absolute bottom-0 right-0 w-1/2">
-            <img :src="img1" alt="Car rental" class="object-cover" />
+            <img :src="productImages[index]" :alt="product.product" class="object-cover" />
           </div>
           <div class="w-3/5">
-            <h3 class="text-white text-2xl font-bold mb-4">Video Streaming</h3>
-            <p class="text-white text-sm mb-6">Enjoy unlimited access to the best HD video streaming platforms without interruption.</p>
-            <button class="bg-white text-purple-700 px-4 py-2 rounded-md font-medium">Book Now</button>
-          </div>
-        </div>
-        
-        <!-- Card 2 -->
-        <div class="bg-gray-700 rounded-xl p-6 relative overflow-hidden">
-          <div class="absolute bottom-0 right-0 w-1/2">
-            <img :src="img2" alt="Event planning" class="object-cover" />
-          </div>
-          <div class="w-3/5">
-            <h3 class="text-white text-2xl font-bold mb-4">Gaming Premium</h3>
-            <p class="text-white text-sm mb-6">Play without limits with exclusive discounts, optimized performance and ultra-fast connection.</p>
-            <button class="bg-white text-gray-700 px-4 py-2 rounded-md font-medium">Explore</button>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="bg-purple-700 rounded-xl p-6 relative overflow-hidden">
-          <div class="absolute bottom-0 right-0 w-1/2">
-            <img :src="img3" alt="Travel platform" class="object-cover" />
-          </div>
-          <div class="w-3/5">
-            <h3 class="text-white text-2xl font-bold mb-4">Music Unlimited</h3>
-            <p class="text-white text-sm mb-6">Listen to your favorite songs with unlimited, ad-free, high-quality audio.</p>
-            <button class="bg-white text-purple-700 px-4 py-2 rounded-md font-medium">Discover</button>
+            <h3 class="text-white text-2xl font-bold mb-4">{{ product.product }}</h3>
+            <p class="text-white text-sm mb-6">
+              {{ getProductDescription(product.product) }}
+              <span class="block mt-2 text-yellow-300">Confidence: {{ (product.confidence * 100).toFixed(0) }}%</span>
+            </p>
+            <button class="bg-white text-purple-700 px-4 py-2 rounded-md font-medium">Get Now</button>
           </div>
         </div>
       </div>
 
-      <!-- Product Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mb-6">
-        <!-- Card 1 -->
-        <div class="bg-gray-800 rounded-xl overflow-hidden">
-          <img :src="img4" alt="Samsung Galaxy S9" class="w-full h-40 object-cover" />
+      <!-- SECTION 2: PREFERRED CHANNELS -->
+      <h2 class="text-2xl font-bold text-white px-4 py-3 mb-2">PREFERRED CHANNELS</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mb-8">
+        <div v-for="(channel, index) in apiData.preferred_channels" :key="index" 
+             class="bg-gray-800 rounded-xl overflow-hidden">
+          <img :src="channelImages[index]" :alt="channel" class="w-full h-40 object-cover" />
           <div class="p-4">
-            <h3 class="text-white text-lg font-bold mb-1"> Extra Data Bundle</h3>
-            <p class="text-white text-sm mb-6">Listen to your favorite songs with unlimited, ad-free, high-quality audio.</p>
+            <h3 class="text-white text-lg font-bold mb-1">{{ channel }}</h3>
+            <p class="text-white text-sm mb-6">{{ getChannelDescription(channel) }}</p>
 
             <div class="flex items-center mt-4 text-gray-400 text-sm">
-              <i class="i-lucide-clock mr-1"></i>
-              <span>Try it</span>
+              <i class="i-lucide-check-circle mr-1"></i>
+              <span>Available</span>
               <div class="mx-2 border-l border-gray-600 h-4"></div>
-              <i class="i-lucide-map-pin mr-1"></i>
-              <span>La Chika, Cotonou</span>
-              <button class="ml-auto text-gray-400">
-                <i class="i-lucide-more-vertical"></i>
+              <i class="i-lucide-zap mr-1"></i>
+              <span>Recommended</span>
+              <button class="ml-auto bg-yellow-400 text-black px-3 py-1 rounded">
+                Open
               </button>
             </div>
           </div>
         </div>
-        
-        <!-- Card 2 -->
-        <div class="bg-gray-800 rounded-xl overflow-hidden">
-          <img :src="img5" alt="Foldable phone" class="w-full h-40 object-cover" />
+      </div>
+
+      <!-- SECTION 3: UPSELL OPPORTUNITIES -->
+      <h2 class="text-2xl font-bold text-white px-4 py-3 mb-2">RECOMMENDED FOR YOU</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mx-4 mb-8">
+        <div v-for="(upsell, index) in apiData.upsell_opportunities" :key="index" 
+             class="bg-gray-800 rounded-xl overflow-hidden">
+          <img :src="upsellImages[index]" :alt="upsell.product" class="w-full h-40 object-cover" />
           <div class="p-4">
-            <h3 class="text-white text-sm font-medium mb-1">Device Upgrade</h3>
-            <p class="text-white text-sm mb-6">It's time to upgrade! We've noticed that you're using an older model, so check out our upgrade offers for greater comfort.</p>
+            <h3 class="text-white text-lg font-bold mb-1">{{ upsell.product }}</h3>
+            <div class="inline-block bg-yellow-400 text-black text-xs px-2 py-1 rounded mb-2">Recommended</div>
+            <p class="text-white text-sm mb-4">{{ upsell.reason }}</p>
 
             <div class="flex items-center mt-4 text-gray-400 text-sm">
               <i class="i-lucide-clock mr-1"></i>
-              <span>Try it</span>
-              <div class="mx-2 border-l border-gray-600 h-4"></div>
-              <i class="i-lucide-map-pin mr-1"></i>
-              <span>La Chika, Cotonou</span>
-              <button class="ml-auto text-gray-400">
-                <i class="i-lucide-more-vertical"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Card 3 -->
-        <div class="bg-gray-800 rounded-xl overflow-hidden">
-          <img  :src="img6" alt="Group of people" class="w-full h-40 object-cover" />
-          <div class="p-4">
-            <h3 class="text-white text-sm font-medium mb-1">Device Upgrade</h3>
-            <div class="flex items-center mt-4 text-gray-400 text-sm">
-              <i class="i-lucide-clock mr-1"></i>
-              <span>1 month ago</span>
+              <span>Limited Offer</span>
               <div class="mx-2 border-l border-gray-600 h-4"></div>
               <i class="i-lucide-map-pin mr-1"></i>
               <span>La Chika, Cotonou</span>
@@ -225,7 +192,9 @@ import img5 from '../../../assets/images/im5.png';
 import img6 from '../../../assets/images/im6.png';
 import img7 from '../../../assets/images/im7.png';
 import img8 from '../../../assets/images/im8.png';
+import { useVideoStore } from '../vieoStore';
 
+const videoStore = useVideoStore();
 const menuItems = ref([
   { name: 'Chill', icon: 'i-lucide-music' },
   { name: 'Shine', icon: 'i-lucide-gamepad-2' },
@@ -235,27 +204,78 @@ const menuItems = ref([
   { name: 'Logout', icon: 'i-lucide-log-out' }
 ]);
 
+// Mock API data (this would usually come from an API call)
+
+var apiData = ref({});
+// const apiData = ref({
+//   top_products: [
+//     { product: "Video Streaming", confidence: 0.85 },
+//     { product: "Gaming Premium", confidence: 0.72 },
+//     { product: "Music Unlimited", confidence: 0.68 }
+//   ],
+//   preferred_channels: [
+//     "myMTN",
+//     "USSD",
+//     "Ayoba"
+//   ],
+//   upsell_opportunities: [
+//     { product: "Extra Data Bundle", reason: "High data usage detected" },
+//     { product: "Device Upgrade", reason: "Old device model detected" }
+//   ]
+// });
+
+// Map images to products, channels, and upsell opportunities
+const productImages = [img1, img2, img3, img1, img2, img3];
+const channelImages = [img4, img5, img6];
+const upsellImages = [img7, img8];
+
+// Product descriptions
+const getProductDescription = (product) => {
+  const descriptions = {
+    "Video Streaming": "Enjoy unlimited access to the best HD video streaming platforms without interruption.",
+    "Gaming Premium": "Play without limits with exclusive discounts, optimized performance and ultra-fast connection.",
+    "Music Unlimited": "Listen to your favorite songs with unlimited, ad-free, high-quality audio."
+  };
+  return descriptions[product] || "Discover our premium service designed for your lifestyle.";
+};
+
+// Channel descriptions
+const getChannelDescription = (channel) => {
+  const descriptions = {
+    "myMTN": "Manage your MTN account easily with the myMTN application. Top up, track your usage and take advantage of exclusive offers!",
+    "USSD": "Quick access to services with simple codes. Check balance, buy data, and more without an internet connection.",
+    "Ayoba": "Chat, share, and discover content with friends and family in a secure environment."
+  };
+  return descriptions[channel] || "Connect with us through this convenient channel.";
+};
+
+// Upsell descriptions
+const getDetailedUpsellDescription = (product) => {
+  const descriptions = {
+    "Extra Data Bundle": "Boost your connection! We've detected high data usage on your account. Get an extra data bundle to stay connected without interruption!",
+    "Device Upgrade": "It's time to upgrade! We've noticed that you're using an older model, so check out our upgrade offers for greater comfort and features."
+  };
+  return descriptions[product] || "We have a special offer just for you based on your usage patterns.";
+};
+
 const recommendation = ref(null);
 
-const recommendations = [
-  {
-    title: 'myMTN App',
-    description: 'Manage your MTN account easily with the myMTN application. Top up, track your usage and take advantage of exclusive offers!',
-    buttonText: 'Try it',
-    image: img4
-  },
-  {
-    title: 'Extra Data Bundle',
-    description: 'Boostez votre connexion ! Nous avons détecté une utilisation élevée de vos données, profitez d’un forfait supplémentaire pour rester connecté sans interruption!',
-    buttonText: 'Get it',
-    image: img8
-  }
-];
-
+// Generate a recommendation from the upsell opportunities in the API data
 const generateRecommendation = () => {
-  // Display a random recommendation
-  const randomIndex = Math.floor(Math.random() * recommendations.length);
-  recommendation.value = recommendations[randomIndex];
+  if (apiData.value.upsell_opportunities && apiData.value.upsell_opportunities.length > 0) {
+    // Get random upsell opportunity from API data
+    const randomIndex = Math.floor(Math.random() * apiData.value.upsell_opportunities.length);
+    const upsell = apiData.value.upsell_opportunities[randomIndex];
+    
+    // Map the upsell to a recommendation object
+    recommendation.value = {
+      title: upsell.product,
+      description: getDetailedUpsellDescription(upsell.product),
+      reason: upsell.reason,
+      buttonText: 'Get Now',
+      image: upsellImages[randomIndex] // Use corresponding image
+    };
+  }
 };
 
 const closeRecommendation = () => {
@@ -265,8 +285,9 @@ const closeRecommendation = () => {
 let recommendationInterval = null;
 
 onMounted(() => {
-  // Generate a recommendation every 5 seconds
-  recommendationInterval = setInterval(generateRecommendation, 3000);
+  // Generate a recommendation every 3 seconds
+  recommendationInterval = setInterval(generateRecommendation, 5000);
+  applyGetRecommendations();
 });
 
 onUnmounted(() => {
@@ -274,6 +295,24 @@ onUnmounted(() => {
     clearInterval(recommendationInterval);
   }
 });
+
+function applyGetRecommendations() {
+  videoStore.recommendationsAction()
+    .then(response => {
+      console.log('Réponse de l\'api', response.data.recommendations);
+      apiData.value = response.data.recommendations
+      // Update apiData with the real API response
+      if (response.data) {
+        // Update only if response has the expected structure
+        if (response.data.top_products) apiData.value.top_products = response.data.top_products;
+        if (response.data.preferred_channels) apiData.value.preferred_channels = response.data.preferred_channels;
+        if (response.data.upsell_opportunities) apiData.value.upsell_opportunities = response.data.upsell_opportunities;
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}
 </script>
 
 <style>
@@ -283,5 +322,12 @@ onUnmounted(() => {
 
 /* Lucide icons via CSS */
 .i-lucide-home { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>') no-repeat center center / contain; width: 1.5rem; height: 1.5rem; }
-/* Add other Lucide icon styles similarly */
+.i-lucide-search { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>') no-repeat center center / contain; width: 1.5rem; height: 1.5rem; }
+.i-lucide-clock { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>') no-repeat center center / contain; width: 1.5rem; height: 1.5rem; }
+.i-lucide-map-pin { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>') no-repeat center center / contain; width: 1.5rem; height: 1.5rem; }
+.i-lucide-more-vertical { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>') no-repeat center center / contain; width: 1.5rem; height: 1.5rem; }
+.i-lucide-arrow-right { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>') no-repeat center center / contain; width: 1.5rem; height: 1.5rem; }
+.i-lucide-check-circle { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>') no-repeat center center / contain; width: 1.5rem; height: 1.5rem; }
+.i-lucide-zap { background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>') no-repeat center center / contain; width: 1.5rem; height: 1.5rem; }
+/* Add other needed Lucide icon styles */
 </style>
