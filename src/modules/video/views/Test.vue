@@ -26,7 +26,7 @@
           <div class="flex-1 flex flex-col">
             <!-- Video player -->
             <div class="relative flex-1 bg-black">
-              <img src="/placeholder.svg?height=400&width=600" alt="Video placeholder" class="w-full h-full object-cover" />
+              <!-- <img src="/placeholder.svg?height=400&width=600" alt="Video placeholder" class="w-full h-full object-cover" /> -->
               <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
                 <p class="text-2xl">Lorem ipsum dolor sit amet consectetur adipiscing elit</p>
               </div>
